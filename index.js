@@ -1,12 +1,15 @@
 const express = require('express');
+const { slice } = require('ramda');
 const recJson = require('./json/testData.json');
 const locJson = require('./json/locales.json');
 const app = express();
 const PORT = process.env.PORT;
 
 app.get('/records', (req, res) => {
-    // console.log(req.query);
-    res.json(recJson.slice(0, Math.floor(Math.random() * (recJson.length))));
+    console.log('q:', req.query);
+    const pagesize = req.query?.pagesize || 3;
+    const pageno = req.query?.pageno || 1;
+    res.json(slice((pageno - 1) * pagesize, pagesize * pageno, recJson));
 });
 
 app.get('/locales', (req, res) => {
