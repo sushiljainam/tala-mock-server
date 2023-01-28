@@ -5,7 +5,7 @@ const locJson = require('./json/locales.json');
 const app = express();
 const PORT = process.env.PORT;
 
-recjson.forEach((rec, id) => recJson[id] = { id: 1 + id, ...rec });
+recJson.forEach((rec, id) => recJson[id] = { id: 1 + id, ...rec });
 
 app.get('/records', (req, res) => {
     console.log('q:', req.query);
